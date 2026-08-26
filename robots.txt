@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /fund/
+
+Sitemap: https://answernorth.com/sitemap.xml

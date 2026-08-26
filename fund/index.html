@@ -4,6 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>ASTRA-Q Paper Fund — Answer North</title>
+<meta name="description" content="Member terminal for the ASTRA-Q Paper Fund — a live paper laboratory with zero real capital.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#f4f3ee">
 <style>
 :root{
   --paper:#f4f3ee;--ink:#11120f;--muted:#6f716a;--line:#d7d6cf;--panel:#e9e8e1;
@@ -18,6 +21,7 @@ body{background:var(--paper);color:var(--ink);
   line-height:1.3;min-height:100vh}
 a{color:inherit;text-decoration:none}
 button{font:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
 .shell{max-width:var(--max);margin:0 auto;padding-inline:var(--pad)}
 .eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:650}
 .muted{color:var(--muted)}
@@ -26,19 +30,21 @@ nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 9
   backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--line) 80%,transparent)}
 .nav-inner{display:flex;align-items:center;height:64px;gap:18px}
 .brand{font-size:16px;font-weight:760;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}
-.brandmark{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:50%;position:relative}
+.brandmark{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:50%;position:relative;flex:none}
 .brandmark:before,.brandmark:after{content:"";position:absolute;background:var(--ink);left:50%;top:50%;transform:translate(-50%,-50%)}
 .brandmark:before{width:1px;height:27px;rotate:45deg}
 .brandmark:after{width:27px;height:1px;rotate:45deg}
 .navlabel{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted);padding-left:14px;border-left:1px solid var(--line)}
-.right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.right{margin-left:auto;display:flex;gap:10px;align-items:center;min-width:0}
 .pill{border:1px solid var(--ink);padding:9px 15px;border-radius:999px;font-size:13px;
   background:transparent;color:var(--ink);cursor:pointer;transition:.25s var(--ease)}
 .pill:hover{background:var(--ink);color:var(--paper)}
 .pill-solid{background:var(--ink);color:var(--paper)}
 .pill-solid:hover{background:transparent;color:var(--ink)}
-.badge{font:11px var(--mono);color:var(--paper);background:var(--ink);border-radius:3px;padding:2px 8px;letter-spacing:.05em}
-.fresh{font:11px var(--mono);color:var(--muted)}
+.pill[disabled]{opacity:.5;cursor:wait}
+.badge{font:11px var(--mono);color:var(--paper);background:var(--ink);border-radius:3px;padding:2px 8px;letter-spacing:.05em;white-space:nowrap}
+.fresh{font:11px var(--mono);color:var(--muted);white-space:nowrap}
+.who{font:11px var(--mono);color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 main{padding-block:34px 90px}
 h2.section{font-size:clamp(30px,3.4vw,52px);letter-spacing:-.045em;font-weight:520;line-height:.98}
 .tabs{display:flex;gap:26px;margin:30px 0 26px;border-bottom:1px solid var(--line)}
@@ -49,7 +55,8 @@ h2.section{font-size:clamp(30px,3.4vw,52px);letter-spacing:-.045em;font-weight:5
 .card{background:var(--paper);border:1px solid var(--line);padding:clamp(18px,2.4vw,32px);margin-bottom:16px;transition:background .35s var(--ease)}
 .card:hover{background:#efeee8}
 .card h3{font-size:clamp(22px,2.4vw,34px);letter-spacing:-.04em;font-weight:520}
-.simhead{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.simhead{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:2px}
+.simmeta{font:11px var(--mono);color:var(--muted);letter-spacing:.03em;margin-bottom:6px}
 .chip{font:10px var(--mono);padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);letter-spacing:.06em}
 .chip.PENDING{color:var(--amber);border-color:var(--amber)}
 .chip.DONE{color:var(--pos);border-color:var(--pos)}
@@ -75,19 +82,25 @@ input,textarea{width:100%;background:var(--panel-2);border:1px solid var(--line)
 textarea{min-height:96px;font:12.5px var(--mono)}
 input:focus,textarea:focus{outline:1px solid var(--ink)}
 .err{color:var(--neg);font-size:12.5px;margin-top:8px;min-height:16px}
+.notice{border:1px solid var(--line);background:var(--panel-2);padding:14px 16px;font:12.5px var(--mono);color:var(--muted);margin-bottom:16px}
+.empty{border:1px dashed var(--line);padding:26px;text-align:center;color:var(--muted);font-size:13px;margin-bottom:16px}
 #login{max-width:400px;margin:10vh auto 0}
 #login .eyebrow{margin-bottom:14px}
 #login h2{font-size:clamp(30px,3.5vw,44px);letter-spacing:-.05em;font-weight:520;margin-bottom:10px}
-.note{font-size:11.5px;color:var(--muted);max-width:760px;margin-top:8px;line-height:1.5}
 .foot{border-top:1px solid var(--line);margin-top:60px;padding-top:22px;font-size:12px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap}
-@media(max-width:700px){.sector{grid-template-columns:110px 1fr 48px}.navlabel{display:none}}
+.foot a{border-bottom:1px solid var(--line)}
+.skl{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.45}}
+@media(max-width:700px){.sector{grid-template-columns:110px 1fr 48px}.navlabel,.who{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head>
 <body>
-<nav><div class="shell nav-inner">
-  <a class="brand" href="../"><span class="brandmark" aria-hidden="true"></span>ANSWER NORTH</a>
+<nav aria-label="Fund terminal"><div class="shell nav-inner">
+  <a class="brand" href="../" aria-label="Answer North home"><span class="brandmark" aria-hidden="true"></span>ANSWER NORTH</a>
   <span class="navlabel">ASTRA-Q PAPER FUND</span>
   <span class="right">
     <span class="badge">PAPER · $0 REAL</span>
+    <span id="who" class="who"></span>
     <span id="fresh" class="fresh"></span>
     <button id="out" class="pill" style="display:none">Sign out</button>
   </span>
@@ -98,41 +111,49 @@ input:focus,textarea:focus{outline:1px solid var(--ink)}
   <div class="eyebrow">Members only</div>
   <h2>Watch the research trade.</h2>
   <p class="muted" style="font-size:14px">A zero-dollar paper portfolio run by ASTRA-Q's own pipeline — universe, signals, risk, execution — streamed live. Sign in, or create an account with an authorized email.</p>
-  <input id="em" type="email" placeholder="email" autocomplete="username">
-  <input id="pw" type="password" placeholder="password" autocomplete="current-password">
-  <div style="display:flex;gap:10px;margin-top:8px">
-    <button id="si" class="pill pill-solid">Sign in</button>
-    <button id="su" class="pill">Create account</button>
-  </div>
-  <div id="lerr" class="err"></div>
+  <form id="login-form" novalidate>
+    <label class="eyebrow" for="em" style="font-size:10px">Email</label>
+    <input id="em" type="email" placeholder="you@example.com" autocomplete="username" required>
+    <label class="eyebrow" for="pw" style="font-size:10px">Password</label>
+    <input id="pw" type="password" placeholder="password" autocomplete="current-password" required>
+    <div style="display:flex;gap:10px;margin-top:10px">
+      <button id="si" type="submit" class="pill pill-solid">Sign in</button>
+      <button id="su" type="button" class="pill">Create account</button>
+    </div>
+  </form>
+  <div id="lerr" class="err" role="alert" aria-live="polite"></div>
+  <p class="muted" style="font-size:11.5px;margin-top:20px">Access is limited to whitelisted members. Signing up with an unauthorized email creates an account that can see nothing.</p>
 </div>
 
 <div id="app" style="display:none">
-  <div class="eyebrow">Live paper portfolio · momentum_12_1 · certified data</div>
+  <div class="eyebrow">Live paper laboratory · momentum_12_1 · certified data</div>
   <h2 class="section" style="margin-top:14px">The day, as ASTRA sees it.</h2>
-  <div class="tabs">
-    <button class="tab on" data-t="trade">Trading day</button>
-    <button class="tab" data-t="research">Research</button>
-    <button class="tab" data-t="lab">Strategy lab</button>
+  <div class="tabs" role="tablist">
+    <button class="tab on" data-t="trade" role="tab" aria-selected="true">Trading day</button>
+    <button class="tab" data-t="research" role="tab" aria-selected="false">Research</button>
+    <button class="tab" data-t="lab" role="tab" aria-selected="false">Strategy lab</button>
   </div>
-  <div id="t-trade"></div>
-  <div id="t-research" style="display:none"></div>
+  <div id="t-trade"><div class="empty skl">Loading portfolio state…</div></div>
+  <div id="t-research" style="display:none"><div class="empty skl">Loading research log…</div></div>
   <div id="t-lab" style="display:none">
     <div class="card">
       <div class="eyebrow" style="margin-bottom:8px">Request a new strategy</div>
       <p class="muted" style="font-size:13.5px;max-width:720px">Describe a signal or strategy idea. The research routine picks requests up at 09:28 and 16:10 ET on market days, runs them through ASTRA-Q's tooling on certified data, and posts the write-up here. Every result is experimental and non-claim-bearing.</p>
-      <input id="rq-title" placeholder="title (e.g. low-vol quality tilt, 60d reversal screen)">
-      <textarea id="rq-body" placeholder="what should ASTRA research? universe, signal idea, constraints…"></textarea>
+      <input id="rq-title" placeholder="title (e.g. low-vol quality tilt, 60d reversal screen)" aria-label="Request title">
+      <textarea id="rq-body" placeholder="what should ASTRA research? universe, signal idea, constraints…" aria-label="Request description"></textarea>
       <div style="display:flex;gap:12px;align-items:center;margin-top:6px">
         <button id="rq-send" class="pill pill-solid">Submit request</button>
-        <span id="rq-msg" class="muted" style="font-size:12.5px"></span>
+        <span id="rq-msg" class="muted" style="font-size:12.5px" aria-live="polite"></span>
       </div>
     </div>
-    <div id="rq-list"></div>
+    <div id="rq-list"><div class="empty skl">Loading requests…</div></div>
   </div>
   <div class="foot">
     <span>© 2026 Answer North</span>
-    <span>Zero-dollar paper simulation. momentum_12_1 Claim B is REJECTED by ASTRA-Q's own adjudication — nothing here is evidence of strategy performance or investment advice.</span>
+    <a href="../">answernorth.com</a>
+    <a href="../privacy/">Privacy</a>
+    <a href="../terms/">Terms</a>
+    <span style="flex-basis:100%">Zero-dollar paper simulation. momentum_12_1 Claim B is REJECTED by ASTRA-Q's own adjudication — nothing here is evidence of strategy performance or investment advice.</span>
   </div>
 </div>
 </main>
@@ -143,33 +164,70 @@ const supa = createClient('https://juslypttczwrdfpzkkqk.supabase.co','eyJhbGciOi
 const $=s=>document.querySelector(s);
 const fmt=(n,d=2)=>n==null?'—':Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
 const cls=n=>n>0?'pos':n<0?'neg':'';
-let timer=null;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let timer=null, busy=false;
+
+function setBusy(b,label){
+  busy=b;
+  const si=$('#si'),su=$('#su');
+  si.disabled=b; su.disabled=b;
+  si.textContent=b?(label||'Working…'):'Sign in';
+}
 
 async function gate(){
   const {data:{session}}=await supa.auth.getSession();
-  if(!session){$('#login').style.display='';$('#app').style.display='none';$('#out').style.display='none';return}
-  const {data:mem}=await supa.from('astraq_members').select('email').limit(1);
-  if(!mem||!mem.length){$('#lerr').textContent='Signed in, but this email is not authorized for the fund dashboard.';await supa.auth.signOut();return}
-  $('#login').style.display='none';$('#app').style.display='';$('#out').style.display='';
+  if(!session){
+    $('#login').style.display='';$('#app').style.display='none';
+    $('#out').style.display='none';$('#who').textContent='';
+    return;
+  }
+  const {data:mem,error}=await supa.from('astraq_members').select('email').limit(1);
+  if(error){$('#lerr').textContent='Could not verify membership: '+error.message;return}
+  if(!mem||!mem.length){
+    $('#lerr').textContent='Signed in, but this email is not authorized for the fund terminal.';
+    await supa.auth.signOut();return;
+  }
+  $('#login').style.display='none';$('#app').style.display='';
+  $('#out').style.display='';$('#who').textContent=session.user.email;
   await refresh();clearInterval(timer);timer=setInterval(refresh,60000);
 }
-$('#si').onclick=async()=>{const {error}=await supa.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});$('#lerr').textContent=error?error.message:'';if(!error)gate()};
-$('#su').onclick=async()=>{const {data,error}=await supa.auth.signUp({email:$('#em').value,password:$('#pw').value,options:{emailRedirectTo:window.location.href}});$('#lerr').textContent=error?error.message:(data.session?'':'Account created — check your email to confirm, then sign in.');if(data?.session)gate()};
+
+$('#login-form').addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  if(busy)return;
+  setBusy(true,'Signing in…');
+  const {error}=await supa.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#pw').value});
+  setBusy(false);
+  $('#lerr').textContent=error?error.message:'';
+  if(!error)gate();
+});
+$('#su').onclick=async()=>{
+  if(busy)return;
+  setBusy(true,'Creating…');
+  const {data,error}=await supa.auth.signUp({email:$('#em').value.trim(),password:$('#pw').value,options:{emailRedirectTo:window.location.href}});
+  setBusy(false);
+  $('#lerr').textContent=error?error.message:(data.session?'':'Account created — check your email to confirm, then sign in.');
+  if(data?.session)gate();
+};
 $('#out').onclick=async()=>{await supa.auth.signOut();clearInterval(timer);gate()};
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+  document.querySelectorAll('.tab').forEach(x=>{x.classList.remove('on');x.setAttribute('aria-selected','false')});
+  t.classList.add('on');t.setAttribute('aria-selected','true');
   ['trade','research','lab'].forEach(k=>$('#t-'+k).style.display=k===t.dataset.t?'':'none');
 });
 
 function simCard(sim,st){
   const sb=st[sim+'|scoreboard']?.payload||{},po=st[sim+'|positions']?.payload||[],me=st[sim+'|meta']?.payload||{};
   const ret=sb.total_return_pct??0, spyret=sb.benchmark_return_pct;
+  const frozen=(me.frozen_utc||'').replace('T',' ').slice(0,16);
+  const head=(me.head||'').slice(0,7);
   let rows=po.map(p=>{
     const pnl=p.pnl_usd, pct=p.pnl_pct;
-    return '<tr><td>'+p.ticker+'</td><td style="color:var(--muted)">'+(p.sector||'')+'</td><td>'+p.shares+'</td><td>'+fmt(p.entry)+'</td><td>'+fmt(p.current)+'</td><td class="'+cls(pnl)+'">'+(pnl==null?'—':(pnl>=0?'+':'')+fmt(pnl))+'</td><td class="'+cls(pct)+'">'+(pct==null?'—':(pct>=0?'+':'')+fmt(pct)+'%')+'</td></tr>';
+    return '<tr><td>'+esc(p.ticker)+'</td><td style="color:var(--muted)">'+esc(p.sector||'')+'</td><td>'+p.shares+'</td><td>'+fmt(p.entry)+'</td><td>'+fmt(p.current)+'</td><td class="'+cls(pnl)+'">'+(pnl==null?'—':(pnl>=0?'+':'')+fmt(pnl))+'</td><td class="'+cls(pct)+'">'+(pct==null?'—':(pct>=0?'+':'')+fmt(pct)+'%')+'</td></tr>';
   }).join('');
-  const sectors=Object.entries((st[sim+'|sectors']?.payload)||{}).map(([k,v])=>'<div class="sector"><span>'+k+'</span><div class="bar" style="width:'+Math.min(100,v*3.2)+'%"></div><span>'+fmt(v,1)+'%</span></div>').join('');
-  return '<div class="card"><div class="simhead"><h3>'+sim+'</h3><span class="chip">'+(sb.state||'—')+'</span></div>'
+  const sectors=Object.entries((st[sim+'|sectors']?.payload)||{}).map(([k,v])=>'<div class="sector"><span>'+esc(k)+'</span><div class="bar" style="width:'+Math.min(100,v*3.2)+'%"></div><span>'+fmt(v,1)+'%</span></div>').join('');
+  return '<div class="card"><div class="simhead"><h3>'+sim+'</h3><span class="chip">'+esc(sb.state||'—')+'</span></div>'
+  +'<div class="simmeta">experiment '+sim+(frozen?' · frozen '+frozen+' UTC':'')+(head?' · build '+head:'')+' · benchmark SPY</div>'
   +'<div class="grid">'
   +'<div class="stat"><div class="k">NAV</div><div class="v">$'+fmt(sb.current_nav_usd)+'</div></div>'
   +'<div class="stat"><div class="k">Cash</div><div class="v">$'+fmt(sb.cash_usd)+'</div></div>'
@@ -178,29 +236,43 @@ function simCard(sim,st){
   +'<div class="stat"><div class="k">Positions</div><div class="v">'+(po.length||0)+'</div></div>'
   +'<div class="stat"><div class="k">Costs</div><div class="v">$'+fmt(sb.transaction_costs_usd)+'</div></div></div>'
   +(sectors?'<div style="margin:8px 0 14px">'+sectors+'</div>':'')
-  +'<div class="tablewrap"><table><tr><th>Ticker</th><th>Sector</th><th>Sh</th><th>Entry</th><th>Current</th><th>P&L $</th><th>P&L %</th></tr>'+rows+'</table></div></div>';
+  +(rows?'<div class="tablewrap"><table><tr><th>Ticker</th><th>Sector</th><th>Sh</th><th>Entry</th><th>Current</th><th>P&L $</th><th>P&L %</th></tr>'+rows+'</table></div>'
+        :'<div class="empty">No positions recorded yet for this experiment.</div>')
+  +'</div>';
 }
 
 async function refresh(){
-  const {data:st_}=await supa.from('astraq_state').select('*');
+  const {data:st_,error}=await supa.from('astraq_state').select('*');
+  if(error){
+    $('#t-trade').innerHTML='<div class="notice">Could not load fund state ('+esc(error.message)+'). Retrying on the next cycle.</div>';
+    return;
+  }
   const st={};(st_||[]).forEach(r=>st[r.sim_id+'|'+r.kind]=r);
   const latest=(st_||[]).map(r=>r.as_of).sort().pop();
   $('#fresh').textContent=latest?('as of '+new Date(latest).toLocaleString()):'no data yet';
-  $('#t-trade').innerHTML=['MKT-SIM-000002','MKT-SIM-000001'].map(s=>simCard(s,st)).join('');
+  if(!(st_||[]).length){
+    $('#t-trade').innerHTML='<div class="empty">No state has been published yet. The sync routine posts during market hours.</div>';
+  }else{
+    $('#t-trade').innerHTML=['MKT-SIM-000002','MKT-SIM-000001'].map(s=>simCard(s,st)).join('');
+  }
   const feed=st['GLOBAL|research_feed']?.payload||[];
   const logs=['MKT-SIM-000002','MKT-SIM-000001'].map(s=>{
     const L=st[s+'|log']?.payload||[];
-    return L.length?'<div class="card"><div class="eyebrow" style="margin-bottom:10px">'+s+' · decision log</div>'+L.map(r=>'<div class="log"><span class="t">'+(r.et||r.t||'')+'</span> <b>'+(r.event||'')+'</b><br><span class="muted">'+(r.detail||'')+'</span></div>').join('')+'</div>':'';
+    return L.length?'<div class="card"><div class="eyebrow" style="margin-bottom:10px">'+s+' · decision log</div>'+L.map(r=>'<div class="log"><span class="t">'+esc(r.et||r.t||'')+'</span> <b>'+esc(r.event||'')+'</b><br><span class="muted">'+esc(r.detail||'')+'</span></div>').join('')+'</div>':'';
   }).join('');
-  $('#t-research').innerHTML=(feed.length?'<div class="card"><div class="eyebrow" style="margin-bottom:10px">Research feed</div>'+feed.map(f=>'<div class="log"><span class="t">'+(f.ts||'')+'</span> <b>'+(f.title||'')+'</b><br><span class="muted" style="white-space:pre-wrap">'+(f.body||'')+'</span></div>').join('')+'</div>':'')+logs;
-  const {data:reqs}=await supa.from('astraq_strategy_requests').select('*').order('id',{ascending:false});
-  $('#rq-list').innerHTML=(reqs||[]).map(r=>'<div class="card"><div class="simhead"><b>#'+r.id+' '+r.title+'</b><span class="chip '+r.status+'">'+r.status+'</span><span class="muted" style="font-size:11px">'+new Date(r.created_at).toLocaleString()+'</span></div><p class="muted" style="font-size:12.5px;margin:6px 0">'+r.prompt+'</p>'+(r.result_md?'<div class="md">'+r.result_md.replace(/</g,'&lt;')+'</div>':'')+'</div>').join('')||'<p class="muted">No strategy requests yet.</p>';
+  const research=(feed.length?'<div class="card"><div class="eyebrow" style="margin-bottom:10px">Research feed</div>'+feed.map(f=>'<div class="log"><span class="t">'+esc(f.ts||'')+'</span> <b>'+esc(f.title||'')+'</b><br><span class="muted" style="white-space:pre-wrap">'+esc(f.body||'')+'</span></div>').join('')+'</div>':'')+logs;
+  $('#t-research').innerHTML=research||'<div class="empty">No research entries yet.</div>';
+  const {data:reqs,error:rqErr}=await supa.from('astraq_strategy_requests').select('*').order('id',{ascending:false});
+  if(rqErr){$('#rq-list').innerHTML='<div class="notice">Could not load requests ('+esc(rqErr.message)+').</div>';return}
+  $('#rq-list').innerHTML=(reqs||[]).map(r=>'<div class="card"><div class="simhead"><b>#'+r.id+' '+esc(r.title)+'</b><span class="chip '+esc(r.status)+'">'+esc(r.status)+'</span><span class="muted" style="font-size:11px">'+new Date(r.created_at).toLocaleString()+'</span></div><p class="muted" style="font-size:12.5px;margin:6px 0">'+esc(r.prompt)+'</p>'+(r.result_md?'<div class="md">'+esc(r.result_md)+'</div>':'')+'</div>').join('')||'<div class="empty">No strategy requests yet. Submit one above — the next research window picks it up.</div>';
 }
 $('#rq-send').onclick=async()=>{
   const {data:{session}}=await supa.auth.getSession();if(!session)return;
   const title=$('#rq-title').value.trim(),prompt=$('#rq-body').value.trim();
   if(!title||!prompt){$('#rq-msg').textContent='title and description required';return}
+  $('#rq-send').disabled=true;
   const {error}=await supa.from('astraq_strategy_requests').insert({requested_by:session.user.email.toLowerCase(),title,prompt});
+  $('#rq-send').disabled=false;
   $('#rq-msg').textContent=error?error.message:'queued — processed at 09:28 / 16:10 ET on market days';
   if(!error){$('#rq-title').value='';$('#rq-body').value='';refresh()}
 };

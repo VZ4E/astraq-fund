@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Off the map — Answer North</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#f4f3ee">
+<style>
+:root{--paper:#f4f3ee;--ink:#11120f;--muted:#6f716a;--line:#d7d6cf;
+  --ease:cubic-bezier(.2,.7,.2,1);--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);min-height:100svh;display:grid;place-items:center;
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  overflow:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{text-align:center;padding:24px;position:relative;z-index:1}
+.code{font:12px var(--mono);letter-spacing:.2em;color:var(--muted)}
+h1{font-size:clamp(54px,10vw,140px);letter-spacing:-.06em;font-weight:520;line-height:.9;margin:18px 0 22px}
+p{color:var(--muted);font-size:16px;max-width:440px;margin:0 auto 34px;line-height:1.5}
+.pill{border:1px solid var(--ink);padding:11px 20px;border-radius:999px;font-size:13px;transition:.25s var(--ease)}
+.pill:hover{background:var(--ink);color:var(--paper)}
+.ring{position:fixed;width:70vmax;height:70vmax;border:1px solid var(--line);border-radius:50%;
+  right:-30vmax;top:-30vmax;pointer-events:none}
+.n{position:fixed;right:8vw;top:10vh;font:11px var(--mono);letter-spacing:.15em;font-weight:700}
+</style></head>
+<body>
+<div class="ring" aria-hidden="true"></div><div class="n" aria-hidden="true">N</div>
+<div class="wrap">
+  <div class="code">404 · BEARING LOST</div>
+  <h1>Off the map.</h1>
+  <p>This page doesn't exist — or it moved while the compass was spinning. Head back north.</p>
+  <a class="pill" href="/">← Answer North home</a>
+</div>
+</body></html>
