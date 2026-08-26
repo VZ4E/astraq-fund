@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASTRA-Q Paper Fund</title>
+<style>
+:root{--bg:#0b0e14;--panel:#12161f;--panel2:#171c27;--line:#232a38;--txt:#d7dce6;--dim:#8b93a3;--acc:#4fc3f7;--green:#4caf7d;--red:#e05d5d;--amber:#e0b45d;--mono:'Cascadia Code','SF Mono',Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:14px/1.5 -apple-system,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;padding:20px}
+header{display:flex;align-items:baseline;gap:14px;padding:18px 0 10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+h1{font-size:20px;letter-spacing:.06em}h1 b{color:var(--acc)}
+.badge{font:11px var(--mono);color:#0b0e14;background:var(--amber);border-radius:3px;padding:2px 8px;letter-spacing:.05em}
+.dim{color:var(--dim)}.mono{font-family:var(--mono)}
+.tabs{display:flex;gap:4px;margin:16px 0}
+.tab{padding:8px 18px;border:1px solid var(--line);border-radius:6px 6px 0 0;background:var(--panel);cursor:pointer;color:var(--dim);font-size:13px;letter-spacing:.04em}
+.tab.on{color:var(--txt);background:var(--panel2);border-bottom-color:var(--panel2)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.stat .k{font-size:11px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.stat .v{font:600 18px var(--mono);margin-top:2px}
+table{width:100%;border-collapse:collapse;font:12.5px var(--mono)}
+th{color:var(--dim);text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);font-weight:500}
+td{padding:5px 8px;text-align:right;border-bottom:1px solid #1a2030}
+th:first-child,td:first-child{text-align:left}
+.pos{color:var(--green)}.neg{color:var(--red)}
+.chip{font:10px var(--mono);padding:2px 7px;border-radius:10px;border:1px solid var(--line);color:var(--dim)}
+.chip.PENDING{color:var(--amber);border-color:var(--amber)}
+.chip.DONE{color:var(--green);border-color:var(--green)}
+.chip.WORKING{color:var(--acc);border-color:var(--acc)}
+.bar{height:8px;border-radius:4px;background:var(--acc);min-width:2px}
+.sector{display:grid;grid-template-columns:170px 1fr 52px;gap:8px;align-items:center;font:12px var(--mono);margin:3px 0}
+input,textarea,button{font:inherit;color:var(--txt)}
+input,textarea{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:9px 11px;margin:5px 0}
+textarea{min-height:90px;font-family:var(--mono);font-size:12.5px}
+button{background:var(--acc);color:#0b0e14;border:0;border-radius:6px;padding:9px 18px;font-weight:600;cursor:pointer}
+button.ghost{background:transparent;color:var(--dim);border:1px solid var(--line)}
+#login{max-width:360px;margin:9vh auto}
+.err{color:var(--red);font-size:12.5px;margin-top:6px;min-height:16px}
+.log{font:12px var(--mono);border-left:2px solid var(--line);padding-left:12px;margin:8px 0}
+.log .t{color:var(--acc)}
+.md{font-size:13px;white-space:pre-wrap;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:12px;font-family:var(--mono);max-height:400px;overflow:auto}
+.right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.tablewrap{overflow-x:auto}
+@media(max-width:700px){.sector{grid-template-columns:110px 1fr 48px}}
+</style></head><body>
+<div class="wrap">
+<header>
+  <h1>ASTRA-<b>Q</b> PAPER FUND</h1>
+  <span class="badge">PAPER &middot; $0 REAL &middot; NON-CLAIM-BEARING</span>
+  <span class="right"><span id="fresh" class="dim mono"></span><button id="out" class="ghost" style="display:none">sign out</button></span>
+</header>
+
+<div id="login">
+  <div class="card">
+    <h2 style="margin-bottom:8px;font-size:16px">Sign in</h2>
+    <p class="dim" style="font-size:12.5px">Members only. New here? Create an account with your authorized email.</p>
+    <input id="em" type="email" placeholder="email" autocomplete="username">
+    <input id="pw" type="password" placeholder="password" autocomplete="current-password">
+    <div style="display:flex;gap:8px;margin-top:6px">
+      <button id="si">Sign in</button><button id="su" class="ghost">Create account</button>
+    </div>
+    <div id="lerr" class="err"></div>
+  </div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="tabs">
+    <div class="tab on" data-t="trade">TRADING DAY</div>
+    <div class="tab" data-t="research">RESEARCH</div>
+    <div class="tab" data-t="lab">STRATEGY LAB</div>
+  </div>
+  <div id="t-trade"></div>
+  <div id="t-research" style="display:none"></div>
+  <div id="t-lab" style="display:none">
+    <div class="card">
+      <h3 style="font-size:15px;margin-bottom:6px">Request a new strategy</h3>
+      <p class="dim" style="font-size:12.5px">Describe a signal or strategy idea. The research routine picks requests up at 09:28 and 16:10 ET on market days, runs them through ASTRA-Q's tooling, and posts the write-up here. All results are experimental and non-claim-bearing.</p>
+      <input id="rq-title" placeholder="title (e.g. low-vol quality tilt, 60d reversal screen)">
+      <textarea id="rq-body" placeholder="what should ASTRA research? universe, signal idea, constraints..."></textarea>
+      <button id="rq-send">Submit request</button><span id="rq-msg" class="dim" style="margin-left:10px;font-size:12.5px"></span>
+    </div>
+    <div id="rq-list"></div>
+  </div>
+</div>
+</div>
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+const supa = createClient('https://juslypttczwrdfpzkkqk.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1c2x5cHR0Y3p3cmRmcHpra3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk0MzQwNDcsImV4cCI6MjA5NTAxMDA0N30.6kfr2OPviGj4w1GAE2DqpROlAOgnTii4NGqHTrF350k');
+const $=s=>document.querySelector(s);
+const fmt=(n,d=2)=>n==null?'—':Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const cls=n=>n>0?'pos':n<0?'neg':'';
+let timer=null;
+
+async function gate(){
+  const {data:{session}}=await supa.auth.getSession();
+  if(!session){$('#login').style.display='';$('#app').style.display='none';$('#out').style.display='none';return}
+  const {data:mem}=await supa.from('astraq_members').select('email').limit(1);
+  if(!mem||!mem.length){$('#lerr').textContent='Signed in, but this email is not authorized for the fund dashboard.';await supa.auth.signOut();return}
+  $('#login').style.display='none';$('#app').style.display='';$('#out').style.display='';
+  await refresh();clearInterval(timer);timer=setInterval(refresh,60000);
+}
+$('#si').onclick=async()=>{const {error}=await supa.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});$('#lerr').textContent=error?error.message:'';if(!error)gate()};
+$('#su').onclick=async()=>{const {data,error}=await supa.auth.signUp({email:$('#em').value,password:$('#pw').value,options:{emailRedirectTo:window.location.href}});$('#lerr').textContent=error?error.message:(data.session?'':'Account created — check your email to confirm, then sign in.');if(data?.session)gate()};
+$('#out').onclick=async()=>{await supa.auth.signOut();clearInterval(timer);gate()};
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+  ['trade','research','lab'].forEach(k=>$('#t-'+k).style.display=k===t.dataset.t?'':'none');
+});
+
+function simCard(sim,st){
+  const sb=st[sim+'|scoreboard']?.payload||{},po=st[sim+'|positions']?.payload||[],me=st[sim+'|meta']?.payload||{};
+  const ret=sb.total_return_pct??0, spyret=sb.benchmark_return_pct;
+  let rows=po.map(p=>{
+    const pnl=p.pnl_usd, pct=p.pnl_pct;
+    return '<tr><td>'+p.ticker+'</td><td class="dim">'+(p.sector||'')+'</td><td>'+p.shares+'</td><td>'+fmt(p.entry)+'</td><td>'+fmt(p.current)+'</td><td class="'+cls(pnl)+'">'+(pnl==null?'—':(pnl>=0?'+':'')+fmt(pnl))+'</td><td class="'+cls(pct)+'">'+(pct==null?'—':(pct>=0?'+':'')+fmt(pct)+'%')+'</td></tr>';
+  }).join('');
+  const sectors=Object.entries((st[sim+'|sectors']?.payload)||{}).map(([k,v])=>'<div class="sector"><span class="dim">'+k+'</span><div class="bar" style="width:'+Math.min(100,v*3.2)+'%"></div><span>'+fmt(v,1)+'%</span></div>').join('');
+  return '<div class="card"><div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap"><h3 style="font-size:15px">'+sim+'</h3><span class="chip">'+(sb.state||'—')+'</span><span class="dim" style="font-size:12px">'+(me.note||'')+'</span></div>'
+  +'<div class="grid" style="margin:12px 0">'
+  +'<div class="stat"><div class="k">NAV</div><div class="v">$'+fmt(sb.current_nav_usd)+'</div></div>'
+  +'<div class="stat"><div class="k">Cash</div><div class="v">$'+fmt(sb.cash_usd)+'</div></div>'
+  +'<div class="stat"><div class="k">Return</div><div class="v '+cls(ret)+'">'+(ret>=0?'+':'')+fmt(ret,3)+'%</div></div>'
+  +'<div class="stat"><div class="k">SPY since entry</div><div class="v '+cls(spyret)+'">'+(spyret==null?'—':(spyret>=0?'+':'')+fmt(spyret,3)+'%')+'</div></div>'
+  +'<div class="stat"><div class="k">Positions</div><div class="v">'+(po.length||0)+'</div></div>'
+  +'<div class="stat"><div class="k">Costs</div><div class="v">$'+fmt(sb.transaction_costs_usd)+'</div></div></div>'
+  +(sectors?'<div style="margin:6px 0 12px">'+sectors+'</div>':'')
+  +'<div class="tablewrap"><table><tr><th>Ticker</th><th>Sector</th><th>Sh</th><th>Entry</th><th>Current</th><th>P&L $</th><th>P&L %</th></tr>'+rows+'</table></div></div>';
+}
+
+async function refresh(){
+  const {data:st_}=await supa.from('astraq_state').select('*');
+  const st={};(st_||[]).forEach(r=>st[r.sim_id+'|'+r.kind]=r);
+  const latest=(st_||[]).map(r=>r.as_of).sort().pop();
+  $('#fresh').textContent=latest?('data as of '+new Date(latest).toLocaleString()):'no data yet';
+  $('#t-trade').innerHTML=['MKT-SIM-000002','MKT-SIM-000001'].map(s=>simCard(s,st)).join('')
+   +'<p class="dim" style="font-size:11.5px">Zero-dollar paper simulation. momentum_12_1 Claim B is REJECTED by ASTRA-Q adjudication — nothing here is evidence of strategy performance. Production remains RESEARCH_ONLY / NOT_ADMITTED.</p>';
+  const feed=st['GLOBAL|research_feed']?.payload||[];
+  const logs=['MKT-SIM-000002','MKT-SIM-000001'].map(s=>{
+    const L=st[s+'|log']?.payload||[];
+    return L.length?'<div class="card"><h3 style="font-size:14px;margin-bottom:8px">'+s+' decision log</h3>'+L.map(r=>'<div class="log"><span class="t">'+(r.et||r.t||'')+'</span> <b>'+(r.event||'')+'</b><br><span class="dim">'+(r.detail||'')+'</span></div>').join('')+'</div>':'';
+  }).join('');
+  $('#t-research').innerHTML=(feed.length?'<div class="card"><h3 style="font-size:14px;margin-bottom:8px">Research feed</h3>'+feed.map(f=>'<div class="log"><span class="t">'+(f.ts||'')+'</span> <b>'+(f.title||'')+'</b><br><span class="dim" style="white-space:pre-wrap">'+(f.body||'')+'</span></div>').join('')+'</div>':'')+logs;
+  const {data:reqs}=await supa.from('astraq_strategy_requests').select('*').order('id',{ascending:false});
+  $('#rq-list').innerHTML=(reqs||[]).map(r=>'<div class="card"><div style="display:flex;gap:10px;align-items:baseline"><b>#'+r.id+' '+r.title+'</b><span class="chip '+r.status+'">'+r.status+'</span><span class="dim" style="font-size:11px">'+new Date(r.created_at).toLocaleString()+'</span></div><p class="dim" style="font-size:12.5px;margin:6px 0">'+r.prompt+'</p>'+(r.result_md?'<div class="md">'+r.result_md.replace(/</g,'&lt;')+'</div>':'')+'</div>').join('')||'<p class="dim">No strategy requests yet.</p>';
+}
+$('#rq-send').onclick=async()=>{
+  const {data:{session}}=await supa.auth.getSession();if(!session)return;
+  const title=$('#rq-title').value.trim(),prompt=$('#rq-body').value.trim();
+  if(!title||!prompt){$('#rq-msg').textContent='title and description required';return}
+  const {error}=await supa.from('astraq_strategy_requests').insert({requested_by:session.user.email.toLowerCase(),title,prompt});
+  $('#rq-msg').textContent=error?error.message:'queued — processed at 09:28 / 16:10 ET on market days';
+  if(!error){$('#rq-title').value='';$('#rq-body').value='';refresh()}
+};
+gate();
+</script></body></html>
