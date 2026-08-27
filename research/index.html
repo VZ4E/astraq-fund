@@ -53,11 +53,42 @@ main{padding:clamp(60px,8vw,120px) 0 100px}
 .foot{border-top:1px solid var(--line);margin-top:80px;padding-top:22px;font-size:12px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap}
 .foot a{border-bottom:1px solid var(--line)}
 @media(max-width:800px){.entry{grid-template-columns:1fr;gap:12px}}
+
+/* site menu */
+.menu-btn{border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;
+  padding:9px 14px;font:inherit;font-size:13px;line-height:1.2;cursor:pointer;margin-left:8px;
+  transition:background .25s,color .25s;white-space:nowrap}
+.menu-btn:hover,.menu-btn[aria-expanded="true"]{background:var(--ink);color:var(--paper)}
+.site-menu{display:none;position:absolute;top:64px;right:clamp(20px,3.2vw,52px);z-index:60;
+  background:var(--paper);border:1px solid var(--line);min-width:240px;padding:6px 0 8px;
+  box-shadow:0 16px 44px rgba(17,18,15,.10)}
+.site-menu.open{display:block}
+.site-menu a{display:block;padding:9px 20px;font-size:14px;text-decoration:none;border-bottom:0}
+.site-menu a:hover{background:#ecebe4}
+.site-menu a.here{font-weight:650}
+.site-menu .group{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);padding:14px 20px 4px}
 </style></head>
 <body>
 <nav aria-label="Primary"><div class="shell nav-inner">
   <a class="brand" href="../"><span class="brandmark" aria-hidden="true"></span>ANSWER NORTH</a>
   <span class="right"><a class="pill" href="../">← Home</a></span>
+<button class="menu-btn" type="button" aria-label="Open site menu" aria-expanded="false" aria-controls="site-menu">☰ Menu</button></div>
+<div class="site-menu" id="site-menu">
+  <a href="../">Home</a>
+  <div class="group">Research</div>
+  <a href="../research/" class="here" aria-current="page">Research log</a>
+  <a href="../research/research-that-argues-with-itself/">Note 001 · Research that argues with itself</a>
+  <div class="group">Systems</div>
+  <a href="../astra-q/">ASTRA-Q</a>
+  <a href="../tlltl/">TLLTL</a>
+  <a href="../fund/">Paper Fund</a>
+  <div class="group">Company</div>
+  <a href="../company/">About</a>
+  <a href="../people/aj-gordon/">AJ Gordon</a>
+  <a href="mailto:hello@answernorth.com">Contact</a>
+  <a href="../privacy/">Privacy</a>
+  <a href="../terms/">Terms</a>
 </div></nav>
 <main class="shell">
   <div class="eyebrow">Research log</div>
@@ -102,4 +133,22 @@ main{padding:clamp(60px,8vw,120px) 0 100px}
     <a href="../">Home</a><a href="../fund/">Paper Fund</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a>
   </div>
 </main>
+<script>
+(function(){
+  var b=document.querySelector('.menu-btn'),m=document.getElementById('site-menu');
+  if(!b||!m)return;
+  function set(open){
+    m.classList.toggle('open',open);
+    b.setAttribute('aria-expanded',open?'true':'false');
+    b.textContent=(open?'×':'☰')+' Menu';
+  }
+  b.addEventListener('click',function(e){e.stopPropagation();set(!m.classList.contains('open'));});
+  document.addEventListener('click',function(e){
+    if(m.classList.contains('open')&&!m.contains(e.target)&&e.target!==b)set(false);
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&m.classList.contains('open')){set(false);b.focus();}
+  });
+})();
+</script>
 </body></html>
