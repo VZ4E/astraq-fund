@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TLLTL — Useful intelligence per unit of compute — Answer North</title>
+<meta name="description" content="TLLTL is Answer North's model-agnostic intelligence layer for reducing wasted compute: semantic compression, model and tool routing, and quality verification that optimization did not degrade output. A research prototype.">
+<link rel="canonical" href="https://answernorth.com/tlltl/">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#f4f3ee">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Answer North">
+<meta property="og:title" content="TLLTL — Useful intelligence per unit of compute">
+<meta property="og:description" content="Semantic compression, model and tool routing, and quality verification that optimization did not degrade output. A research prototype.">
+<meta property="og:url" content="https://answernorth.com/tlltl/">
+<meta property="og:image" content="https://answernorth.com/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TLLTL — Useful intelligence per unit of compute">
+<meta name="twitter:description" content="Semantic compression, model and tool routing, and quality verification. A research prototype.">
+<meta name="twitter:image" content="https://answernorth.com/og-default.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://answernorth.com/tlltl/#webpage",
+      "url": "https://answernorth.com/tlltl/",
+      "name": "TLLTL — Useful intelligence per unit of compute",
+      "isPartOf": {"@id": "https://answernorth.com/#website"},
+      "about": {"@id": "https://answernorth.com/tlltl/#system"}
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://answernorth.com/tlltl/#system",
+      "name": "TLLTL",
+      "alternateName": "The Large Language Tokenization Language",
+      "url": "https://answernorth.com/tlltl/",
+      "description": "A model-agnostic intelligence layer for reducing wasted compute, optimizing context, routing work intelligently, and verifying that optimization does not degrade output. A research prototype; no external benchmark results are claimed.",
+      "creator": {"@id": "https://answernorth.com/#org"}
+    }
+  ]
+}
+</script>
+<style>
+:root{--paper:#f4f3ee;--ink:#11120f;--muted:#6f716a;--line:#d7d6cf;--panel:#eeede7;
+  --pad:clamp(20px,3.2vw,52px);--ease:cubic-bezier(.2,.7,.2,1);
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-feature-settings:"ss01" 1,"cv10" 1;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.shell{max-width:1500px;margin:0 auto;padding-inline:var(--pad)}
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 90%,transparent);
+  backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--line) 80%,transparent)}
+.nav-inner{display:flex;align-items:center;height:64px;gap:18px}
+.brand{font-size:16px;font-weight:760;letter-spacing:-.03em;display:flex;align-items:center;gap:10px;text-decoration:none}
+.brandmark{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:50%;position:relative;flex:none}
+.brandmark:before,.brandmark:after{content:"";position:absolute;background:var(--ink);left:50%;top:50%;transform:translate(-50%,-50%)}
+.brandmark:before{width:1px;height:27px;rotate:45deg}
+.brandmark:after{width:27px;height:1px;rotate:45deg}
+.right{margin-left:auto;display:flex;gap:8px}
+.pill{border:1px solid var(--ink);padding:9px 15px;border-radius:999px;font-size:13px;text-decoration:none;transition:.25s var(--ease)}
+.pill:hover{background:var(--ink);color:var(--paper)}
+.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:650}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+header.art{max-width:1500px;margin:0 auto;padding:clamp(60px,8vw,120px) var(--pad) 0}
+h1{font-size:clamp(44px,6.5vw,104px);line-height:.92;letter-spacing:-.055em;font-weight:520;max-width:1100px;margin:22px 0 26px}
+.dek{font-size:clamp(19px,1.8vw,28px);letter-spacing:-.02em;line-height:1.3;color:var(--muted);max-width:760px}
+.meta{font:12px var(--mono);letter-spacing:.08em;color:var(--muted);margin-top:34px;display:flex;gap:22px;flex-wrap:wrap;text-transform:uppercase}
+article{max-width:760px;margin:0 auto;padding:clamp(44px,5vw,80px) var(--pad) 40px;font-size:17px;color:#26271f}
+article p{margin:0 0 1.25em}
+h2{font-size:clamp(24px,2.6vw,36px);letter-spacing:-.035em;line-height:1.05;font-weight:520;margin:64px 0 18px;color:var(--ink)}
+h2 .n{display:block;font:12px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+blockquote{border-left:2px solid var(--ink);padding:4px 0 4px 22px;margin:30px 0;
+  font-size:clamp(19px,1.7vw,24px);letter-spacing:-.02em;line-height:1.35;color:var(--ink);font-weight:500}
+ul{margin:0 0 1.25em;padding-left:22px}
+li{margin:4px 0}
+code,.tok{font-family:var(--mono);font-size:.85em;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:1px 6px;white-space:nowrap}
+.chain{font:13.5px var(--mono);background:var(--panel);border:1px solid var(--line);padding:16px 18px;margin:0 0 1.25em;line-height:1.7;overflow-x:auto}
+.arch{border:1px solid var(--line);margin:26px 0}
+.arch div{display:grid;grid-template-columns:44px 210px 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:baseline}
+.arch div:last-child{border-bottom:0}
+.arch .n2{font:11px var(--mono);color:var(--muted)}
+.arch .t{font:13px var(--mono);letter-spacing:.08em}
+.arch .d{font-size:13.5px;color:var(--muted)}
+.status{border:1px solid var(--line);background:var(--panel);padding:20px 24px;font-size:13.5px;color:var(--muted);margin:64px 0 0}
+.status .eyebrow{color:var(--ink);margin-bottom:10px}
+.related{max-width:760px;margin:0 auto;padding:0 var(--pad) 40px}
+.related .entry{display:block;border:1px solid var(--line);padding:18px 22px;margin-bottom:10px;text-decoration:none;transition:background .25s var(--ease)}
+.related .entry:hover{background:#efeee8}
+.related .entry b{display:block;font-size:17px;letter-spacing:-.02em;font-weight:600}
+.related .entry span{font-size:13px;color:var(--muted)}
+.foot{border-top:1px solid var(--line);max-width:1500px;margin:0 auto;padding:22px var(--pad) 48px;
+  font-size:12px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap}
+.foot a{border-bottom:1px solid var(--line);text-decoration:none}
+@media(max-width:600px){article{font-size:16px}.arch div{grid-template-columns:1fr}}
+</style></head>
+<body>
+<nav><div class="shell nav-inner">
+  <a class="brand" href="../"><span class="brandmark" aria-hidden="true"></span>ANSWER NORTH</a>
+  <span class="right"><a class="pill" href="../research/">Research</a><a class="pill" href="../company/">Company</a></span>
+</div></nav>
+
+<header class="art">
+  <div class="eyebrow">Answer North · Compute intelligence</div>
+  <h1>TLLTL</h1>
+  <p class="dek">A model-agnostic intelligence layer for reducing wasted compute, optimizing context, routing work intelligently, and verifying that optimization does not degrade output.</p>
+  <div class="meta"><span>System</span><span>Research prototype</span><span>Model-agnostic</span></div>
+</header>
+
+<article>
+  <h2><span class="n">01</span>What TLLTL is</h2>
+  <p>TLLTL — The Large Language Tokenization Language — is not prompt compression. It is an R&amp;D effort by <a href="../company/">Answer North</a> to optimize <em>useful intelligence per unit of compute</em> — across models, tools, and providers.</p>
+  <blockquote>Token counts are a cost metric, not a value metric. The target is the ratio of task-relevant reasoning to total compute spent.</blockquote>
+  <p>If intelligence becomes cheaper without becoming weaker, entirely new classes of automation become economical. That is the design target — and the reason verification is a first-class layer rather than an afterthought.</p>
+
+  <h2><span class="n">02</span>The pipeline</h2>
+  <div class="arch">
+    <div><span class="n2">00</span><span class="t">INPUT</span><span class="d">Raw task, context, and constraints as they arrive.</span></div>
+    <div><span class="n2">01</span><span class="t">CONTEXT ANALYSIS</span><span class="d">Identify what the task actually depends on — and what it doesn't.</span></div>
+    <div><span class="n2">02</span><span class="t">SEMANTIC COMPRESSION</span><span class="d">Reduce low-value context while preserving requirements and recoverability.</span></div>
+    <div><span class="n2">03</span><span class="t">MODEL / TOOL ROUTING</span><span class="d">Send work to the best capability-to-cost frontier, across providers.</span></div>
+    <div><span class="n2">04</span><span class="t">EXECUTION</span><span class="d">Run the optimized task where it belongs.</span></div>
+    <div><span class="n2">05</span><span class="t">QUALITY VERIFICATION</span><span class="d">Measure whether optimization changed the answer or violated a constraint.</span></div>
+  </div>
+  <p>Three layers carry the work: <strong>compress</strong> (reduce repeated or low-value context while preserving semantic requirements and recoverability), <strong>route</strong> (send tasks to the model or tool that can satisfy the job at the best capability-to-cost frontier), and <strong>verify</strong> (measure whether optimization changed the answer, violated constraints, or created hidden quality loss).</p>
+
+  <h2><span class="n">03</span>What is claimed, and what is not</h2>
+  <p>TLLTL is a research prototype. Reduction and routing targets are design goals measured internally — no external benchmark results are claimed here. A working paper, "Useful intelligence per token as an optimization target," is in preparation; when it is published it will carry the reproducible measurements this page deliberately does not.</p>
+  <p>TLLTL's measurement discipline follows the same house rule as <a href="../astra-q/">ASTRA-Q</a>: a public numerical claim requires a published, reproducible methodology first.</p>
+
+  <div class="status">
+    <div class="eyebrow">Status</div>
+    TLLTL is a research prototype under active development at Answer North. No external benchmark results, savings figures, or model comparisons are published yet — by policy, the methodology ships before the numbers.
+  </div>
+</article>
+
+<div class="related">
+  <div class="eyebrow" style="margin-bottom:12px">Related</div>
+  <a class="entry" href="../astra-q/"><b>ASTRA-Q</b><span>Answer North's capital-intelligence system</span></a>
+  <a class="entry" href="../research/"><b>Research log</b><span>Notes, working papers, and validation reports</span></a>
+  <a class="entry" href="../company/"><b>About Answer North</b><span>The company behind ASTRA-Q and TLLTL</span></a>
+</div>
+
+<div class="foot">
+  <span>© 2026 Answer North</span>
+  <a href="../">Home</a><a href="../research/">Research</a><a href="../astra-q/">ASTRA-Q</a><a href="../company/">Company</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a>
+</div>
+</body></html>

@@ -30,7 +30,7 @@ PROD = "https://answernorth.com"
 SCHEMA_REQUIRED = {
     "/": {"Organization", "Person", "WebSite", "CreativeWork"},
     "/astra-q/": {"CreativeWork"},
-    "/tltll/": {"CreativeWork"},
+    "/tlltl/": {"CreativeWork"},
     "/company/": {"Organization", "AboutPage"},
     "/people/aj-gordon/": {"Person", "ProfilePage"},
     "/research/": set(),
@@ -41,7 +41,7 @@ SCHEMA_REQUIRED = {
 
 # Pages that must carry an og:image (the entity layer plus the article).
 OG_IMAGE_REQUIRED = {
-    "/", "/astra-q/", "/tltll/", "/company/", "/people/aj-gordon/",
+    "/", "/astra-q/", "/tlltl/", "/company/", "/people/aj-gordon/",
     "/research/", "/research/research-that-argues-with-itself/",
 }
 
@@ -49,11 +49,11 @@ OG_IMAGE_REQUIRED = {
 # A source that 404s is skipped (not yet live); once live, its edges are enforced.
 SPINE = {
     # live today
-    "/": ["/astra-q/", "/tltll/", "/company/"],
+    "/": ["/astra-q/", "/tlltl/", "/company/"],
     "/astra-q/": ["/research/research-that-argues-with-itself/", "/company/"],
-    "/tltll/": ["/astra-q/", "/company/"],
-    "/company/": ["/people/aj-gordon/", "/astra-q/", "/tltll/", "/research/"],
-    "/people/aj-gordon/": ["/company/", "/astra-q/", "/tltll/"],
+    "/tlltl/": ["/astra-q/", "/company/"],
+    "/company/": ["/people/aj-gordon/", "/astra-q/", "/tlltl/", "/research/"],
+    "/people/aj-gordon/": ["/company/", "/astra-q/", "/tlltl/"],
     "/research/research-that-argues-with-itself/": ["/astra-q/", "/people/aj-gordon/"],
     # phase 2 (skip until live)
     "/astra-q/methodology/": ["/astra-q/"],
@@ -65,7 +65,7 @@ SPINE = {
 
 SITEMAP_EXPECTED = {
     PROD + p for p in (
-        "/", "/astra-q/", "/tltll/", "/company/", "/people/aj-gordon/",
+        "/", "/astra-q/", "/tlltl/", "/company/", "/people/aj-gordon/",
         "/research/", "/research/research-that-argues-with-itself/",
         "/privacy/", "/terms/",
     )
