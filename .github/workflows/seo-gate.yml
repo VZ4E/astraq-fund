@@ -1,13 +1,14 @@
 name: SEO gate
 
 # Read-only release gate: runs scripts/verify-answernorth.py against production.
-# Triggers: after every Pages deploy (retrying through the ~10-minute CDN cache),
-# on a Mon/Thu schedule, and on demand.
+# Triggers: every push to main (the retry loop rides out the Pages deploy and the
+# ~10-minute CDN cache), a Mon/Thu schedule, and on demand.
+# Note: workflow_run cannot target the built-in "pages build and deployment"
+# workflow — it is dynamic, not a repo workflow file — hence the push trigger.
 
 on:
-  workflow_run:
-    workflows: ["pages build and deployment"]
-    types: [completed]
+  push:
+    branches: [main]
   schedule:
     - cron: "17 13 * * 1,4"   # Mon/Thu 13:17 UTC
   workflow_dispatch:
