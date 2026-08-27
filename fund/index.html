@@ -46,7 +46,7 @@ nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 9
 .fresh{font:11px var(--mono);color:var(--muted);white-space:nowrap}
 .who{font:11px var(--mono);color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 main{padding-block:34px 90px}
-h2.section{font-size:clamp(30px,3.4vw,52px);letter-spacing:-.045em;font-weight:520;line-height:.98}
+h2.section,h1.section{font-size:clamp(30px,3.4vw,52px);letter-spacing:-.045em;font-weight:520;line-height:.98}
 .tabs{display:flex;gap:26px;margin:30px 0 26px;border-bottom:1px solid var(--line)}
 .tab{background:none;border:0;color:var(--muted);font-family:var(--mono);font-size:12px;
   letter-spacing:.13em;text-transform:uppercase;padding:0 2px 13px;cursor:pointer;
@@ -109,7 +109,7 @@ input:focus,textarea:focus{outline:1px solid var(--ink)}
 <main class="shell">
 <div id="login">
   <div class="eyebrow">Members only</div>
-  <h2>Watch the research trade.</h2>
+  <h1 class="section" style="margin:14px 0 12px">Watch the research trade.</h1>
   <p class="muted" style="font-size:14px">A zero-dollar paper portfolio run by ASTRA-Q's own pipeline — universe, signals, risk, execution — streamed live. Sign in, or create an account with an authorized email.</p>
   <form id="login-form" novalidate>
     <label class="eyebrow" for="em" style="font-size:10px">Email</label>

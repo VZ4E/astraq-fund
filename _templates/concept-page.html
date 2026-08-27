@@ -1,0 +1,131 @@
+<!doctype html>
+<!--
+  TEMPLATE: concept page (a term Answer North coins or uses).
+  Copy to research/[[slug]]/index.html and resolve every [[PLACEHOLDER]].
+  Structure: question → 1-3 sentence answer → why it matters → how Answer North does it
+  (link to methodology) → limitations → related.
+  Rules: a concept with no research behind it is thin content — do not ship it until the
+  research exists. Add the URL to sitemap.xml and its edges to SPINE in the verifier.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>[[CONCEPT]] — Answer North</title>
+<meta name="description" content="[[ONE-SENTENCE DEFINITION OF THE CONCEPT.]]">
+<link rel="canonical" href="https://answernorth.com/research/[[SLUG]]/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#f4f3ee">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Answer North">
+<meta property="og:title" content="[[CONCEPT]]">
+<meta property="og:description" content="[[ONE-SENTENCE DEFINITION OF THE CONCEPT.]]">
+<meta property="og:url" content="https://answernorth.com/research/[[SLUG]]/">
+<meta property="og:image" content="https://answernorth.com/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://answernorth.com/og-default.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://answernorth.com/research/[[SLUG]]/#term",
+      "name": "[[CONCEPT]]",
+      "description": "[[ONE-SENTENCE DEFINITION OF THE CONCEPT.]]",
+      "url": "https://answernorth.com/research/[[SLUG]]/"
+    },
+    {
+      "@type": "Article",
+      "@id": "https://answernorth.com/research/[[SLUG]]/#article",
+      "headline": "[[CONCEPT]]",
+      "url": "https://answernorth.com/research/[[SLUG]]/",
+      "mainEntityOfPage": "https://answernorth.com/research/[[SLUG]]/",
+      "description": "[[ONE-SENTENCE DEFINITION OF THE CONCEPT.]]",
+      "datePublished": "[[YYYY-MM-DD]]",
+      "dateModified": "[[YYYY-MM-DD]]",
+      "isPartOf": {"@id": "https://answernorth.com/#website"},
+      "about": {"@id": "https://answernorth.com/research/[[SLUG]]/#term"},
+      "author": {"@type": "Person", "@id": "https://answernorth.com/people/aj-gordon/#person", "name": "AJ Gordon", "url": "https://answernorth.com/people/aj-gordon/"},
+      "publisher": {"@type": "Organization", "@id": "https://answernorth.com/#org", "name": "Answer North", "url": "https://answernorth.com/", "logo": {"@type": "ImageObject", "url": "https://answernorth.com/logo.png"}}
+    }
+  ]
+}
+</script>
+<style>
+:root{--paper:#f4f3ee;--ink:#11120f;--muted:#6f716a;--line:#d7d6cf;--panel:#eeede7;
+  --pad:clamp(20px,3.2vw,52px);--ease:cubic-bezier(.2,.7,.2,1);
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-feature-settings:"ss01" 1,"cv10" 1;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.shell{max-width:1500px;margin:0 auto;padding-inline:var(--pad)}
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 90%,transparent);
+  backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--line) 80%,transparent)}
+.nav-inner{display:flex;align-items:center;height:64px;gap:18px}
+.brand{font-size:16px;font-weight:760;letter-spacing:-.03em;display:flex;align-items:center;gap:10px;text-decoration:none}
+.brandmark{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:50%;position:relative;flex:none}
+.brandmark:before,.brandmark:after{content:"";position:absolute;background:var(--ink);left:50%;top:50%;transform:translate(-50%,-50%)}
+.brandmark:before{width:1px;height:27px;rotate:45deg}
+.brandmark:after{width:27px;height:1px;rotate:45deg}
+.right{margin-left:auto;display:flex;gap:8px}
+.pill{border:1px solid var(--ink);padding:9px 15px;border-radius:999px;font-size:13px;text-decoration:none;transition:.25s var(--ease)}
+.pill:hover{background:var(--ink);color:var(--paper)}
+.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:650}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+header.art{max-width:1500px;margin:0 auto;padding:clamp(60px,8vw,120px) var(--pad) 0}
+h1{font-size:clamp(44px,6.5vw,104px);line-height:.92;letter-spacing:-.055em;font-weight:520;max-width:1100px;margin:22px 0 26px}
+.dek{font-size:clamp(19px,1.8vw,28px);letter-spacing:-.02em;line-height:1.3;color:var(--muted);max-width:760px}
+article{max-width:760px;margin:0 auto;padding:clamp(44px,5vw,80px) var(--pad) 40px;font-size:17px;color:#26271f}
+article p{margin:0 0 1.25em}
+.answer{border:1px solid var(--line);background:var(--panel);padding:clamp(20px,2.6vw,34px);margin:0 0 54px;
+  font-size:clamp(18px,1.6vw,23px);letter-spacing:-.015em;line-height:1.4;color:var(--ink)}
+h2{font-size:clamp(24px,2.6vw,36px);letter-spacing:-.035em;line-height:1.05;font-weight:520;margin:64px 0 18px;color:var(--ink)}
+h2 .n{display:block;font:12px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+ul{margin:0 0 1.25em;padding-left:22px}
+li{margin:4px 0}
+.status{border:1px solid var(--line);background:var(--panel);padding:20px 24px;font-size:13.5px;color:var(--muted);margin:64px 0 0}
+.status .eyebrow{color:var(--ink);margin-bottom:10px}
+.foot{border-top:1px solid var(--line);max-width:1500px;margin:0 auto;padding:22px var(--pad) 48px;
+  font-size:12px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap}
+.foot a{border-bottom:1px solid var(--line);text-decoration:none}
+@media(max-width:600px){article{font-size:16px}}
+</style></head>
+<body>
+<nav><div class="shell nav-inner">
+  <a class="brand" href="../../"><span class="brandmark" aria-hidden="true"></span>ANSWER NORTH</a>
+  <span class="right"><a class="pill" href="../">← Research</a></span>
+</div></nav>
+
+<header class="art">
+  <div class="eyebrow">Answer North · Concept</div>
+  <h1>[[CONCEPT]]</h1>
+  <p class="dek">[[THE QUESTION THIS CONCEPT ANSWERS, AS A QUESTION.]]</p>
+</header>
+
+<article>
+  <div class="answer">[[1–3 SENTENCE ANSWER. This is the quotable definition — write it to be lifted whole.]]</div>
+
+  <h2><span class="n">01</span>Why it matters</h2>
+  <p>[[Why this concept exists; what failure it prevents.]]</p>
+
+  <h2><span class="n">02</span>How Answer North does it</h2>
+  <p>[[The concrete mechanism, with ASTRA-Q or TLTLL as the worked example — not an ad. Link the methodology: <a href="../../astra-q/methodology/">ASTRA-Q methodology</a>.]]</p>
+
+  <h2><span class="n">03</span>Limitations</h2>
+  <p>[[What the concept does not solve.]]</p>
+
+  <div class="status">
+    <div class="eyebrow">Related</div>
+    [[Links to the research that uses this concept.]] · <a href="../../astra-q/methodology/">ASTRA-Q methodology</a> · <a href="../">Research log</a>
+  </div>
+</article>
+
+<div class="foot">
+  <span>© 2026 Answer North</span>
+  <a href="../../">Home</a><a href="../">Research</a><a href="../../astra-q/">ASTRA-Q</a><a href="../../company/">Company</a><a href="../../privacy/">Privacy</a><a href="../../terms/">Terms</a>
+</div>
+</body></html>

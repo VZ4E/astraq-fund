@@ -1,0 +1,176 @@
+<!doctype html>
+<!--
+  TEMPLATE: research note / validation report.
+  Copy to research/[[slug]]/index.html and resolve every [[PLACEHOLDER]].
+  Rules (from the entity-first SEO plan):
+   - datePublished is the first day the content goes public; dateModified moves only on substantive edits.
+   - No claim without backing. Results table requires a published methodology.
+   - Spine links are enforced by scripts/verify-answernorth.py: every ASTRA-Q evidence report links to
+     /astra-q/methodology/ and /astra-q/, and the methodology page links back to it.
+   - Add the new URL to sitemap.xml and to SPINE in the verifier when it ships.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>[[TITLE]] — Answer North</title>
+<meta name="description" content="[[ONE-SENTENCE DESCRIPTION]] Answer North Research Note [[NNN]].">
+<link rel="canonical" href="https://answernorth.com/research/[[SLUG]]/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<meta name="theme-color" content="#f4f3ee">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Answer North">
+<meta property="og:title" content="[[TITLE]]">
+<meta property="og:description" content="[[ONE-SENTENCE DESCRIPTION]]">
+<meta property="og:url" content="https://answernorth.com/research/[[SLUG]]/">
+<meta property="og:image" content="https://answernorth.com/og-default.png">
+<meta property="article:published_time" content="[[YYYY-MM-DD]]">
+<meta property="article:author" content="https://answernorth.com/people/aj-gordon/">
+<meta property="article:section" content="Research">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://answernorth.com/og-default.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "@id": "https://answernorth.com/research/[[SLUG]]/#article",
+  "headline": "[[TITLE]]",
+  "url": "https://answernorth.com/research/[[SLUG]]/",
+  "mainEntityOfPage": "https://answernorth.com/research/[[SLUG]]/",
+  "description": "[[ONE-SENTENCE DESCRIPTION]]",
+  "datePublished": "[[YYYY-MM-DD]]",
+  "dateModified": "[[YYYY-MM-DD]]",
+  "isPartOf": {"@id": "https://answernorth.com/#website"},
+  "author": {"@type": "Person", "@id": "https://answernorth.com/people/aj-gordon/#person", "name": "AJ Gordon", "url": "https://answernorth.com/people/aj-gordon/"},
+  "publisher": {"@type": "Organization", "@id": "https://answernorth.com/#org", "name": "Answer North", "url": "https://answernorth.com/", "logo": {"@type": "ImageObject", "url": "https://answernorth.com/logo.png"}},
+  "about": {"@type": "CreativeWork", "@id": "https://answernorth.com/astra-q/#system", "name": "ASTRA-Q", "url": "https://answernorth.com/astra-q/"},
+  "image": "https://answernorth.com/og-default.png"
+}
+</script>
+<style>
+:root{--paper:#f4f3ee;--ink:#11120f;--muted:#6f716a;--line:#d7d6cf;--panel:#eeede7;
+  --pad:clamp(20px,3.2vw,52px);--ease:cubic-bezier(.2,.7,.2,1);
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-feature-settings:"ss01" 1,"cv10" 1;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.shell{max-width:1500px;margin:0 auto;padding-inline:var(--pad)}
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 90%,transparent);
+  backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--line) 80%,transparent)}
+.nav-inner{display:flex;align-items:center;height:64px;gap:18px}
+.brand{font-size:16px;font-weight:760;letter-spacing:-.03em;display:flex;align-items:center;gap:10px;text-decoration:none}
+.brandmark{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:50%;position:relative;flex:none}
+.brandmark:before,.brandmark:after{content:"";position:absolute;background:var(--ink);left:50%;top:50%;transform:translate(-50%,-50%)}
+.brandmark:before{width:1px;height:27px;rotate:45deg}
+.brandmark:after{width:27px;height:1px;rotate:45deg}
+.right{margin-left:auto;display:flex;gap:8px}
+.pill{border:1px solid var(--ink);padding:9px 15px;border-radius:999px;font-size:13px;text-decoration:none;transition:.25s var(--ease)}
+.pill:hover{background:var(--ink);color:var(--paper)}
+.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:650}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+header.art{max-width:1500px;margin:0 auto;padding:clamp(60px,8vw,120px) var(--pad) 0}
+h1{font-size:clamp(44px,6.5vw,104px);line-height:.92;letter-spacing:-.055em;font-weight:520;max-width:1100px;margin:22px 0 26px}
+.dek{font-size:clamp(19px,1.8vw,28px);letter-spacing:-.02em;line-height:1.3;color:var(--muted);max-width:760px}
+.meta{font:12px var(--mono);letter-spacing:.08em;color:var(--muted);margin-top:34px;display:flex;gap:22px;flex-wrap:wrap;text-transform:uppercase}
+article{max-width:760px;margin:0 auto;padding:clamp(44px,5vw,80px) var(--pad) 40px;font-size:17px;color:#26271f}
+article p{margin:0 0 1.25em}
+.abstract{border:1px solid var(--line);background:var(--panel);padding:clamp(20px,2.6vw,34px);margin:0 0 54px}
+.abstract .eyebrow{margin-bottom:14px}
+.abstract p{font-size:15.5px}
+.abstract p:last-child{margin-bottom:0}
+h2{font-size:clamp(24px,2.6vw,36px);letter-spacing:-.035em;line-height:1.05;font-weight:520;margin:64px 0 18px;color:var(--ink)}
+h2 .n{display:block;font:12px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+blockquote{border-left:2px solid var(--ink);padding:4px 0 4px 22px;margin:30px 0;
+  font-size:clamp(19px,1.7vw,24px);letter-spacing:-.02em;line-height:1.35;color:var(--ink);font-weight:500}
+ul{margin:0 0 1.25em;padding-left:22px}
+li{margin:4px 0}
+code,.tok{font-family:var(--mono);font-size:.85em;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:1px 6px;white-space:nowrap}
+.chain{font:13.5px var(--mono);background:var(--panel);border:1px solid var(--line);padding:16px 18px;margin:0 0 1.25em;line-height:1.7;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:0 0 1.25em}
+th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+th{background:var(--panel);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.status{border:1px solid var(--line);background:var(--panel);padding:20px 24px;font-size:13.5px;color:var(--muted);margin:64px 0 0}
+.status .eyebrow{color:var(--ink);margin-bottom:10px}
+.foot{border-top:1px solid var(--line);max-width:1500px;margin:0 auto;padding:22px var(--pad) 48px;
+  font-size:12px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap}
+.foot a{border-bottom:1px solid var(--line);text-decoration:none}
+@media(max-width:600px){article{font-size:16px}}
+</style></head>
+<body>
+<nav><div class="shell nav-inner">
+  <a class="brand" href="../../"><span class="brandmark" aria-hidden="true"></span>ANSWER NORTH</a>
+  <span class="right"><a class="pill" href="../">← Research</a></span>
+</div></nav>
+
+<header class="art">
+  <div class="eyebrow">Answer North Research · Note [[NNN]]</div>
+  <h1>[[TITLE]]</h1>
+  <p class="dek">[[DEK — one sentence]]</p>
+  <div class="meta"><span>[[SYSTEM]]</span><span>[[MONTH YYYY]]</span><span>[[TYPE: Research note / Validation report]]</span></div>
+  <p style="font-size:14px;color:var(--muted);margin-top:18px">By <a href="../../people/aj-gordon/">AJ Gordon</a>, Founder, <a href="../../company/">Answer North</a> · Published <time datetime="[[YYYY-MM-DD]]">[[Month DD, YYYY]]</time></p>
+</header>
+
+<article>
+  <div class="abstract">
+    <div class="eyebrow">Abstract</div>
+    <p>[[ABSTRACT]]</p>
+    <p class="muted" style="font-size:13px">Method: this report follows the ASTRA-Q methodology at <a href="../../astra-q/methodology/">/astra-q/methodology/</a>; the system it evaluates is <a href="../../astra-q/">ASTRA-Q</a>.</p>
+  </div>
+
+  <h2><span class="n">01</span>Hypothesis</h2>
+  <p>[[The preregistered hypothesis, stated before results were known.]]</p>
+
+  <h2><span class="n">02</span>Design</h2>
+  <p>[[Experiment design: universe, period, controls, preregistration reference.]]</p>
+
+  <h2><span class="n">03</span>Blinding</h2>
+  <p>[[What was blinded from whom, and how the blind was enforced.]]</p>
+
+  <h2><span class="n">04</span>Sample</h2>
+  <p>[[Sample definition and size. What was excluded and why.]]</p>
+
+  <h2><span class="n">05</span>Oracle</h2>
+  <p>[[The external oracle or ground truth used, and its independence from the system under test.]]</p>
+
+  <h2><span class="n">06</span>Failure definition</h2>
+  <p>[[What outcome would have counted as failure — defined before the run.]]</p>
+
+  <h2><span class="n">07</span>Results</h2>
+  <table>
+    <tr><th>[[Metric]]</th><th>[[Value]]</th><th>[[Notes]]</th></tr>
+    <tr><td>[[…]]</td><td>[[…]]</td><td>[[…]]</td></tr>
+  </table>
+
+  <h2><span class="n">08</span>Limitations</h2>
+  <p>[[What this result does not establish. Explicitly: nothing here is investment performance.]]</p>
+
+  <h2><span class="n">09</span>Reproduction</h2>
+  <div class="chain">build hash: [[SHA]]
+commands:   [[COMMANDS]]
+artifacts:  [[ARTIFACT LOCATIONS]]</div>
+
+  <div class="status">
+    <div class="eyebrow">Research status</div>
+    ASTRA-Q remains an experimental research system. Results here are engineering evidence about the research process, not investment performance, advice, an offer, or a solicitation.
+  </div>
+
+  <div class="status" style="margin-top:16px">
+    <div class="eyebrow">Cite this note</div>
+    Gordon, AJ. "[[TITLE]]." <em>Answer North Research</em>, Note [[NNN]], [[Month DD, YYYY]].<br>
+    <span class="mono" style="font-size:12px">https://answernorth.com/research/[[SLUG]]/</span>
+  </div>
+
+  <div class="status" style="margin-top:16px">
+    <div class="eyebrow">Related</div>
+    <a href="../../astra-q/methodology/">ASTRA-Q methodology</a> — how this class of experiment is run · <a href="../../astra-q/">ASTRA-Q</a> — the system under test · <a href="../">Research log</a>
+  </div>
+</article>
+
+<div class="foot">
+  <span>© 2026 Answer North</span>
+  <a href="../../">Home</a><a href="../">Research</a><a href="../../astra-q/">ASTRA-Q</a><a href="../../company/">Company</a><a href="../../privacy/">Privacy</a><a href="../../terms/">Terms</a>
+</div>
+</body></html>

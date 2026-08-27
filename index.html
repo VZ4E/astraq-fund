@@ -13,9 +13,67 @@
   <meta property="og:title" content="ANSWER NORTH — Intelligence with direction" />
   <meta property="og:description" content="Research and infrastructure for AI systems that must reason efficiently, produce evidence, and make consequential decisions." />
   <meta property="og:url" content="https://answernorth.com/" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://answernorth.com/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ANSWER NORTH — Intelligence with direction" />
   <meta name="twitter:description" content="Research and infrastructure for AI systems that must reason efficiently, produce evidence, and make consequential decisions." />
+  <meta name="twitter:image" content="https://answernorth.com/og-default.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://answernorth.com/#org",
+        "name": "Answer North",
+        "url": "https://answernorth.com/",
+        "logo": "https://answernorth.com/logo.png",
+        "email": "hello@answernorth.com",
+        "slogan": "Intelligence with direction.",
+        "description": "A research company building infrastructure for governed autonomous intelligence — AI systems that must reason efficiently, produce evidence, and make consequential decisions.",
+        "founder": {"@id": "https://answernorth.com/people/aj-gordon/#person"},
+        "sameAs": ["https://github.com/VZ4E"],
+        "address": {"@type": "PostalAddress", "addressRegion": "NY", "addressCountry": "US"}
+      },
+      {
+        "@type": "Person",
+        "@id": "https://answernorth.com/people/aj-gordon/#person",
+        "name": "AJ Gordon",
+        "url": "https://answernorth.com/people/aj-gordon/",
+        "jobTitle": "Founder",
+        "worksFor": {"@id": "https://answernorth.com/#org"}
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://answernorth.com/#website",
+        "name": "Answer North",
+        "url": "https://answernorth.com/",
+        "publisher": {"@id": "https://answernorth.com/#org"}
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": "https://answernorth.com/astra-q/#system",
+        "name": "ASTRA-Q",
+        "url": "https://answernorth.com/astra-q/",
+        "description": "Evidence-first quantitative research and autonomous financial intelligence infrastructure — preregistered experiments, adversarial validation, evidence custody, fail-closed authority. Research and paper stages active; live capital not authorized.",
+        "creator": {"@id": "https://answernorth.com/#org"},
+        "subjectOf": {
+          "@type": "ScholarlyArticle",
+          "@id": "https://answernorth.com/research/research-that-argues-with-itself/#article",
+          "url": "https://answernorth.com/research/research-that-argues-with-itself/"
+        }
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": "https://answernorth.com/tltll/#system",
+        "name": "TLTLL",
+        "url": "https://answernorth.com/tltll/",
+        "description": "A model-agnostic intelligence layer for reducing wasted compute, optimizing context, routing work intelligently, and verifying that optimization does not degrade output. Research prototype.",
+        "creator": {"@id": "https://answernorth.com/#org"}
+      }
+    ]
+  }
+  </script>
   <style>
     :root{
       --paper:#f4f3ee;
@@ -201,7 +259,7 @@
     }
     .product-card:hover{background:#efeee8}
     .product-card .num{font-size:12px}
-    .product-card h3{
+    .product-card h2{
       font-size:clamp(54px,7vw,116px);letter-spacing:-.065em;
       line-height:.82;margin:0;font-weight:520;
     }
@@ -459,9 +517,9 @@
       <a class="brand" href="#top" aria-label="Answer North home"><span class="brandmark" aria-hidden="true"></span>ANSWER NORTH</a>
       <div class="nav-links">
         <a href="#research">Research</a>
-        <a href="#astra">ASTRA-Q</a>
-        <a href="#tltll">TLTLL</a>
-        <a href="#company">Company</a>
+        <a href="astra-q/">ASTRA-Q</a>
+        <a href="tltll/">TLTLL</a>
+        <a href="company/">Company</a>
         <a href="#fund">Fund</a>
       </div>
       <div class="nav-right">
@@ -473,9 +531,9 @@
   </nav>
   <div class="mobile-drawer" aria-hidden="true">
     <a href="#research">Research</a>
-    <a href="#astra">ASTRA-Q</a>
-    <a href="#tltll">TLTLL</a>
-    <a href="#company">Company</a>
+    <a href="astra-q/">ASTRA-Q</a>
+    <a href="tltll/">TLTLL</a>
+    <a href="company/">Company</a>
     <a href="#fund">Fund</a>
     <div class="drawer-meta">
       <a href="fund/" id="login-cta-m">Login →</a>
@@ -522,7 +580,7 @@
           <span class="num">01 — CAPITAL INTELLIGENCE</span>
           <div class="glyph astra" aria-hidden="true"></div>
           <div>
-            <h3>ASTRA‑Q</h3>
+            <h2>ASTRA‑Q</h2>
             <p class="body-lg">Evidence-first quantitative research and autonomous financial intelligence infrastructure — built to challenge its own assumptions before capital ever touches them.</p>
           </div>
         </a>
@@ -536,7 +594,7 @@
             <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
           <div>
-            <h3>TLTLL</h3>
+            <h2>TLTLL</h2>
             <p class="body-lg">A model-agnostic intelligence layer for reducing wasted compute, optimizing context, routing work intelligently, and verifying that optimization does not degrade output.</p>
           </div>
         </a>
@@ -763,8 +821,8 @@
   <footer>
     <div class="footer-grid">
       <div><div class="brand"><span class="brandmark" aria-hidden="true"></span>ANSWER NORTH</div><p style="max-width:260px;margin-top:18px">Accountable intelligence. Efficient systems. Direction over noise.</p></div>
-      <div><h5>Systems</h5><a href="#astra">ASTRA‑Q</a><a href="#tltll">TLTLL</a><a href="fund/">Paper Fund</a></div>
-      <div><h5>Company</h5><a href="#company">About</a><a href="research/">Research</a><a href="mailto:hello@answernorth.com">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></div>
+      <div><h5>Systems</h5><a href="astra-q/">ASTRA‑Q</a><a href="tltll/">TLTLL</a><a href="fund/">Paper Fund</a></div>
+      <div><h5>Company</h5><a href="company/">About</a><a href="people/aj-gordon/">Founder</a><a href="research/">Research</a><a href="mailto:hello@answernorth.com">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></div>
       <div><h5>Elsewhere</h5><a href="https://github.com/VZ4E" rel="noopener">GitHub</a><span class="soon">X / Twitter <em>SOON</em></span><span class="soon">LinkedIn <em>SOON</em></span></div>
     </div>
     <div class="footer-brand">ANSWER NORTH</div>
