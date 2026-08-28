@@ -17,7 +17,7 @@ body{background:var(--paper);color:var(--ink);line-height:1.55;
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .shell{max-width:var(--max);margin:0 auto;padding-inline:var(--pad)}
-nav{position:sticky;top:0;background:color-mix(in srgb,var(--paper) 90%,transparent);
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 90%,transparent);
   backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;height:64px;gap:18px}
 .brand{font-size:16px;font-weight:760;letter-spacing:-.03em;text-decoration:none}
@@ -63,7 +63,7 @@ main{padding-bottom:100px}
   <a href="../fund/">Paper Fund</a>
   <div class="group">Company</div>
   <a href="../company/">About</a>
-  <a href="../people/aj-gordon/">AJ Gordon</a>
+  <a href="../people/aj-gordon/">Founder</a>
   <a href="mailto:hello@answernorth.com">Contact</a>
   <a href="../privacy/" class="here" aria-current="page">Privacy</a>
   <a href="../terms/">Terms</a>

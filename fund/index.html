@@ -91,8 +91,23 @@ input:focus,textarea:focus{outline:1px solid var(--ink)}
 .foot a{border-bottom:1px solid var(--line)}
 .skl{animation:pulse 1.2s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.45}}
-@media(max-width:700px){.sector{grid-template-columns:110px 1fr 48px}.navlabel,.who{display:none}}
+@media(max-width:700px){.sector{grid-template-columns:110px 1fr 48px}.navlabel,.who{display:none}.nav-inner{gap:10px}.menu-btn{padding:9px 10px;margin-left:2px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* site menu */
+.menu-btn{border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;
+  padding:9px 14px;font:inherit;font-size:13px;line-height:1.2;cursor:pointer;margin-left:8px;
+  transition:background .25s,color .25s;white-space:nowrap}
+.menu-btn:hover,.menu-btn[aria-expanded="true"]{background:var(--ink);color:var(--paper)}
+.site-menu{display:none;position:absolute;top:64px;right:clamp(20px,3.2vw,52px);z-index:60;
+  background:var(--paper);border:1px solid var(--line);min-width:240px;padding:6px 0 8px;
+  box-shadow:0 16px 44px rgba(17,18,15,.10)}
+.site-menu.open{display:block}
+.site-menu a{display:block;padding:9px 20px;font-size:14px;text-decoration:none;border-bottom:0}
+.site-menu a:hover{background:#ecebe4}
+.site-menu a.here{font-weight:650}
+.site-menu .group{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);padding:14px 20px 4px}
 </style></head>
 <body>
 <nav aria-label="Fund terminal"><div class="shell nav-inner">
@@ -103,7 +118,24 @@ input:focus,textarea:focus{outline:1px solid var(--ink)}
     <span id="who" class="who"></span>
     <span id="fresh" class="fresh"></span>
     <button id="out" class="pill" style="display:none">Sign out</button>
+<button class="menu-btn" type="button" aria-label="Open site menu" aria-expanded="false" aria-controls="site-menu">☰ Menu</button>
   </span>
+</div>
+<div class="site-menu" id="site-menu">
+  <a href="../">Home</a>
+  <div class="group">Research</div>
+  <a href="../research/">Research log</a>
+  <a href="../research/research-that-argues-with-itself/">Note 001 · Research that argues with itself</a>
+  <div class="group">Systems</div>
+  <a href="../astra-q/">ASTRA-Q</a>
+  <a href="../tlltl/">TLLTL</a>
+  <a href="../fund/" class="here" aria-current="page">Paper Fund</a>
+  <div class="group">Company</div>
+  <a href="../company/">About</a>
+  <a href="../people/aj-gordon/">Founder</a>
+  <a href="mailto:hello@answernorth.com">Contact</a>
+  <a href="../privacy/">Privacy</a>
+  <a href="../terms/">Terms</a>
 </div></nav>
 
 <main class="shell">
@@ -277,4 +309,23 @@ $('#rq-send').onclick=async()=>{
   if(!error){$('#rq-title').value='';$('#rq-body').value='';refresh()}
 };
 gate();
-</script></body></html>
+</script>
+<script>
+(function(){
+  var b=document.querySelector('.menu-btn'),m=document.getElementById('site-menu');
+  if(!b||!m)return;
+  function set(open){
+    m.classList.toggle('open',open);
+    b.setAttribute('aria-expanded',open?'true':'false');
+    b.textContent=(open?'\u00d7':'\u2630')+' Menu';
+  }
+  b.addEventListener('click',function(e){e.stopPropagation();set(!m.classList.contains('open'));});
+  document.addEventListener('click',function(e){
+    if(m.classList.contains('open')&&!m.contains(e.target)&&e.target!==b)set(false);
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&m.classList.contains('open')){set(false);b.focus();}
+  });
+})();
+</script>
+</body></html>
