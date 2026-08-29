@@ -59,6 +59,11 @@ main{padding:clamp(60px,8vw,120px) 0 100px}
   padding:9px 14px;font:inherit;font-size:13px;line-height:1.2;cursor:pointer;margin-left:8px;
   transition:background .25s,color .25s;white-space:nowrap}
 .menu-btn:hover,.menu-btn[aria-expanded="true"]{background:var(--ink);color:var(--paper)}
+/* DEFECT_FIX mobile nav overflow: the inline pills and the hamburger both
+   rendered at every width, so the nav row could not fit a phone viewport
+   (375px viewport vs 413px of content = 38px horizontal overflow). Below
+   700px the hamburger is the nav; the pills it duplicates are hidden. */
+@media(max-width:700px){.nav-inner .right{display:none}}
 .site-menu{display:none;position:absolute;top:64px;right:clamp(20px,3.2vw,52px);z-index:60;
   background:var(--paper);border:1px solid var(--line);min-width:240px;padding:6px 0 8px;
   box-shadow:0 16px 44px rgba(17,18,15,.10)}
