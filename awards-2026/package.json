@@ -1,0 +1,1 @@
+{"name":"duo-fncs-awards-2026-draft","private":true,"scripts":{"dev":"/usr/bin/python3 server.py --demo","test":"/usr/bin/python3 -m unittest discover -s tests -v"}}
